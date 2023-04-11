@@ -6,21 +6,17 @@ use App\Models\RecipeModel;
 
 class User extends BaseController
 {
-    public function __construct()
-    {
-        $this->session = session();
-    }
 
     public function index()
     {
-        
+        $session = session();
         //cek apakah ada session bernama logged_in
-		if(!$this->session->has('logged_in')){
+        if (!$session->has('logged_in')) {
             return redirect()->to('/login');
         }
-        
+
         //cek position dari session
-        if($this->session->get('position') == 'admin'){
+        if ($session->get('position') == 'admin') {
             return redirect()->to('/admin');
         }
 

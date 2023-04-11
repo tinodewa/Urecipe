@@ -6,21 +6,17 @@ use App\Models\RecipeModel;
 
 class Admin extends BaseController
 {
-    public function __construct()
-    {
-        $this->session = session();
-    }
 
     public function index()
     {
-        
+        $session = session();
         //cek apakah ada session bernama logged_in
-		if(!$this->session->has('logged_in')){
+        if (!$session->has('logged_in')) {
             return redirect()->to('/login');
         }
 
         //cek position dari session
-        if($this->session->get('position') == 'user'){
+        if ($session->get('position') == 'user') {
             return redirect()->to('/user');
         }
 
@@ -49,7 +45,7 @@ class Admin extends BaseController
         $result = $recipe->insert([
             'id_user' => 1,
             'name' => $this->request->getPost("add_name"),
-            // 'description' => $this->request->getPost("add_desc")
+            'description' => $this->request->getPost("add_desc")
         ]);
 
         if ($result == true) {
@@ -65,7 +61,7 @@ class Admin extends BaseController
         $recipe = new RecipeModel();
         $detail['delete'] = $recipe->find($id_recipe);
 
-        if ($this->request->getMethod() === 'post') {
+        if ($this->request->getGet() === 'post') {
             $recipe->delete($id_recipe);
 
             return redirect()->to('/admin')
