@@ -1,0 +1,14 @@
+ul.pagination li:hover {
+  
+}
+ul.pagination li a{
+    text-decoration: none;
+    padding:5px 10px;
+    border:1px solid #dedede;
+    border-radius: 6px;
+    margin-right:2px;
+}
+ul.pagination li a:hover {
+    background-color: #4aaff8;
+    color:#fff;
+}
